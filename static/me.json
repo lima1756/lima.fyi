@@ -1,0 +1,253 @@
+{
+    "personal_data":{
+        "name":"Luis Iván",
+        "lastName": "Morett Arévalo",
+        "title": "Computer Systems Engineer Student",
+        "contact": {
+            "street":"Juan Alvarez",
+            "number": 1282,
+            "cp": 44200,
+            "city": "Guadalajara",
+            "state": "Jalisco",
+            "country": "México",
+            "cellphone": 3311516589,
+            "email": [
+                {
+                    "username":"luisivanmorett",
+                    "domain":"hotmail.com",
+                    "ico":"microsoftMail"
+                },
+                {
+                    "username":"luisivanmorett",
+                    "domain":"gmail.com",
+                    "ico":"googleMail"
+                }
+            ]
+        }
+    },
+    "aboutMe":"Write down here a little paragraph about me :)",
+    "urls":[
+        {
+            "websiteName":"LinkedIn",
+            "url":"https://www.linkedin.com/in/ivanmorett/",
+            "description":"Hey, this is my LinkedIn profile, I try to update it but sometimes I forget to add new things (or I'm to lazy to add past things), the most updated and complet info about me is here or in my .docx resume",
+            "ico":null
+        },
+        {
+            "websiteName":"Github",
+            "url":"https://github.com/lima1756",
+            "description":"This are the repositories I have of different projects I have worked on, you can see more about them in their respective repo.",
+            "ico":null
+        },
+        {
+            "websiteName":"HackerRank",
+            "url":"https://www.hackerrank.com/lima1756",
+            "description":"This is my HackerRank account, here I practice programming abilities and also learn sometimes new things about different languages or algorithms.",
+            "ico":null
+        }
+    ],
+    "education": [
+        {
+            "school":"Centro de Enseñanza Técnica Industrial",
+            "degree": "Junior Engineer Diploma",
+            "discipline": "Computer Software Engineer",
+            "start": 2013,
+            "end": 2017,
+            "gpa": 95.6,
+            "extracurricular":[
+                {
+                    "name":"Sculpting",
+                    "type":"Cultural",
+                    "level": null,
+                    "awards": null
+                },
+                {
+                    "name":"Cinematography",
+                    "type":"Cultural",
+                    "level": null,
+                    "awards": null
+                }
+            ]
+        },
+        {
+            "school":"Tecnológico de Monterrey",
+            "degree": "B.S. Engineer's degree",
+            "discipline": "Systems Engineer",
+            "start": 2017,
+            "end": 2021,
+            "gpa": 98,
+            "extracurricular":[
+                {
+                    "name":"Tennis",
+                    "type":"Sport",
+                    "level": 1,
+                    "awards": null
+                },
+                {
+                    "name":"Swimming",
+                    "type":"Sport",
+                    "level": null,
+                    "awards": null
+                },
+                {
+                    "name":"Personal Defense",
+                    "type":"Sport",
+                    "level": null,
+                    "awards": null
+                },
+                {
+                    "name": "Course of Entrepreneurship with Human Sense",
+                    "type": "Education",
+                    "level": null,
+                    "awards": null
+                }
+            ]
+        }
+    ],
+    "awards":[
+        {
+            "award":"2° place in calendar 2015a on scholar performance in Computer Science Division ",
+            "relationship":["education", 0],
+            "issuedBy":"Centro de Enseñanza Técnica Industrial",
+            "month": null,
+            "year": null,
+            "description": null
+        },
+        {
+            "award":"1° place in calendars 2014a, 2015b, 2016a and 2016b on scholar performance in Computer Science Division",
+            "relationship":["education", 0],
+            "issuedBy":"Centro de Enseñanza Técnica Industrial",
+            "month": null,
+            "year": null,
+            "description": null
+        },
+        {
+            "award":"Participation at Hackaton of Centro Fox and Campus Party",
+            "relationship":null,
+            "issuedBy":"Centro Fox and Campus Party",
+            "month": "June",
+            "year": 2016,
+            "description": null
+        },
+        {
+            "award":"2° place in IngeTec 2017A Computer Science Division",
+            "relationship":["education", 0],
+            "issuedBy":"Centro de Enseñanza Técnica Industrial",
+            "month": "june",
+            "year": 2017,
+            "description":"With the project \"Sistema de Registro y Control (Medicamentos y Citas) de pacientes en clínicas médicas\" also called SISAL (Sistema Integral para la Salud)"
+        },
+        {
+            "award":"Evaluator at the event \"Infotronica 2017B\"",
+            "relationship":null,
+            "issuedBy":"Centro de Enseñanza Técnica Industrial",
+            "month": "December",
+            "year": 2017,
+            "description":null
+        }
+    ],
+    "certifications": [
+        {
+            "name":"Introducción al Desarrollo de Videojuegos con Unity",
+            "issuedBy":"Universitat Politècnica de València (UPV)",
+            "licence":"24OrNqMp26011",
+            "monthStart":"January",
+            "yearStart":2016,
+            "monthEnd":null,
+            "yearEnd":null,
+            "url":"http://oa.upv.es/credenciales/24OrNqMp26011.pdf"
+        },
+        {
+            "name":"DAT208x: Introduction to Python for Data Science",
+            "issuedBy":"Microsoft",
+            "licence":"077157c0854944c483cbd48709da6a96",
+            "monthStart":"February",
+            "yearStart":2016,
+            "monthEnd":null,
+            "yearEnd":null,
+            "url":"https://courses.edx.org/certificates/077157c0854944c483cbd48709da6a96"
+        },
+        {
+            "name":"Completition of C# Intermediate: Classes, Interfaces and OOP",
+            "issuedBy":"Udemy",
+            "licence":"UC-6XGRC507",
+            "monthStart":"November",
+            "yearStart":2017,
+            "monthEnd":null,
+            "yearEnd":null,
+            "url":"https://www.udemy.com/certificate/UC-6XGRC507/"
+        }
+    ],
+    "languages":[
+        {
+            "language":"Spanish",
+            "level":"Native"
+        },
+        {
+            "language":"English",
+            "level":"Advanced"
+        },
+        {
+            "language":"Chinese",
+            "level":"Basic"
+        }
+    ],
+    "aptitudes":[
+        {
+            "type": "Programming Language",
+            "aptitude": "C#"
+        },
+        {
+            "type": "Programming Language",
+            "aptitude": "C++"
+        },
+        {
+            "type": "Programming Language",
+            "aptitude": "Python"
+        },
+        {
+            "type": "Programming Language",
+            "aptitude": "PHP"
+        },
+        {
+            "type": "Programming Language",
+            "aptitude": "Java"
+        },
+        {
+            "type": "Programming Language",
+            "aptitude": "MySQL"
+        },
+        {
+            "type": "Tool",
+            "aptitude": "Visual Studio"
+        },
+        {
+            "type": "Tool",
+            "aptitude": "Visual Studio Code"
+        },
+        {
+            "type": "Tool",
+            "aptitude": "Basic AWS"
+        },
+        {
+            "type": "Tool",
+            "aptitude": "Git and GitHub"
+        },
+        {
+            "type": "Tool",
+            "aptitude": "Laravel"
+        },
+        {
+            "type": "Tool",
+            "aptitude": "Django"
+        },
+        {
+            "type": "Tool",
+            "aptitude": "Basic CodeIgniter"
+        },
+        {
+            "type": "Knowledge",
+            "aptitude": "Basic Networking"
+        }
+    ]
+}
