@@ -10,23 +10,24 @@
         <link rel="stylesheet" href='{% static "css/style.css" %}'>
         <script defer src='{% static "fontsawesome/js/fontawesome-all.js" %}'></script>
     </head>
-    <body data-spy="scroll" data-target="#menu-bar" data-offset="0">
+    <body data-spy="scroll" data-target="#menu-bar">
+
         <!-- This is my all powerfull menu, it will stay fixed to the side of the page -->
         <ul id='nav' class="nav flex-column">
             <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Home">
-                <a class="nav-link active" href="#"><i class='fas fa-home fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+                <a class="nav-link active menu-item" href="#"><i class='fas fa-home fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" ></i></a>
             </li>
             <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Blog">
-                <a class="nav-link" href="#"><i class='fas fa-newspaper fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+                <a class="nav-link menu-item" href="#"><i class='fas fa-newspaper fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" ></i></a>
             </li>
             <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Projects">
-                <a class="nav-link" href="#"><i class='fas fa-desktop fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+                <a class="nav-link menu-item" href="#"><i class='fas fa-desktop fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" ></i></a>
             </li>
             <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Contact">
-                <a class="nav-link" href="#"><i class='fas fa-envelope fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+                <a class="nav-link menu-item" href="#"><i class='fas fa-envelope fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" ></i></a>
             </li>
         </ul>
-        
+
         <div class="text-center">
             <div id='top-bar'></div>
             <div id='general-info-bar' class="p-3 text-white">
@@ -40,25 +41,33 @@
         <nav id='menu-bar' class="navbar sticky-top navbar-dark">
             <ul class="nav nav-pills mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact-info">My Information</a>
+                    <a class="nav-link scroll-item" href="#contact-info">My Information</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#mdo">mdo</a>
+                    <a class="nav-link scroll-item" href="#education-info">Education</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href='#one'>one</a>
+                    <a class="nav-link scroll-item" href='#known-info'>What I know?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link scroll-item" href='#awards-info'>Awards</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link scroll-item" href='#certifications-info'>Certifications and courses</a>
                 </li>
             </ul>
         </nav>
-        <div id=infoContainer class='container'>
-            <div id='contact-info' class='row'>
-                <div class="col-sm-12">
+
+        <!-- General personal information -->
+        <div id='contact-info' class='container info-block'>
+            <div class='row'>
+                <div class="col-sm-12 section-title">
                     <h2><i class="far fa-address-card fa-lg" style='color:#5c34a4'></i> My Information</h2>
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">Personal Info</h4>
+                            <h3 class="card-title">Personal Information</h4>
                             <p class="card-text"><strong>I live at: </strong>{{ data.personal_data.contact.street }} #{{ data.personal_data.contact.number }}, 
                                 {{ data.personal_data.contact.city }}, {{ data.personal_data.contact.state }}, {{ data.personal_data.contact.country }}</p>
                             <p class="card-text"><strong>My cellphone is: </strong>{{ data.personal_data.contact.cellphone }}</p>
@@ -69,6 +78,20 @@
                                     {% endfor %}
                                 </ul> 
                             </p>
+                            <p class='card-text'>
+                                <strong>Hobbies: </strong> {{data.personal_data.hobbies}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Known languages</h4>
+                            <p class="card-text">
+                                <ul>
+                                    {% for lang in data.languages %}
+                                    <li><strong>{{ lang.language }}</strong>: {{lang.level}}</li>
+                                    {% endfor %}
+                                </ul>
                         </div>
                     </div>
                 </div>
@@ -85,14 +108,115 @@
                         </div>
                     </div>
                 </div>
+                
+            </div> 
+        </div>
+
+        <!-- Education information -->
+        <div id='education-info' class='container info-block'>
+            <div class='row info-block'>
+                <div class="col-sm-12 section-title">
+                    <h2><i class="fas fa-graduation-cap fa-lg" style='color:#5c34a4'></i> Education</h2>
+                </div>
+                {% for edu in data.education reversed%}
+                    <div class='col-sm-4'>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"><strong>{{ edu.school }}</strong>, {{edu.city}}</h4>
+                                <h5 class="card-text">{{ edu.degree }} in {{ edu.discipline }}</h5>
+                                <h6 class="card-text">{{ edu.start }} - {{ edu.end }}</h6>
+                                <h6 class="card-text">GPA - {{ edu.gpa }}/100</h6>
+                            </div>
+                            {% if edu.extracurricular %}
+                                <a class="btn btn-url" data-toggle="collapse" href="#extracurricular{{ forloop.counter }}" aria-expanded="false" aria-controls="extracurricular{{ forloop.counter }}" style='margin-bottom:0'>
+                                    Extracurricular activities
+                                </a>
+                                <div class="collapse card-footer" id="extracurricular{{ forloop.counter }}">
+                                    <ul class="list-group list-group-flush">
+                                        {% for class in edu.extracurricular %}
+                                            <li class="list-group-item">{{class.name}} {% if class.level %} {{class.level}} {% endif %}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <h3>Please add education information to the data</h3>
+                {% endfor %}
             </div>
-            <div id='mdo'>
-                <h4>@mdo</h4>
-                <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+        </div>
+
+        <!-- What I know? information -->
+        <div id='known-info'  class='container info-block'>
+            {% if data.aptitudes %}
+                <div class='row info-block'>
+                    <div class="col-sm-12 section-title">
+                        <h2><i class="fas fa-bookmark fa-lg" style='color:#5c34a4'></i> What I know?</h2>
+                    </div>
+                    {% for category in aptitudes_categories %}
+                        <div class="col-sm-{{aptitudes_categories_grid}}">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-header">{{ category }}</li>
+                                    {% for apt in data.aptitudes %} 
+                                        {% if apt.type == category %}   
+                                            <li class="list-group-item">{{ apt.aptitude }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Awards information -->
+        <div id='awards-info' class='container info-block'>
+            <div class='row info-block'>
+                <div class="col-sm-12 section-title">
+                    <h2><i class="far fa-star fa-lg" style='color:#5c34a4'></i> Awards</h2>
+                </div>
+                {% for award in data.awards reversed %}
+                    <div class='col-sm-{{awards_grid}} d-flex align-items-stretch'>
+                        <div class="card align-items-stretch">
+                            <div class="card-body">
+                                <h4 class="card-title"><strong>{{ award.name }}</strong></h4>
+                                <p class="card-text"> Issued by:  {{ award.issuedBy }}</p>
+                                <p class='card-text'>{% if award.month %} {{ award.month }} {% endif %} {% if award.year %} {{ award.year }} {% endif %}</p>
+                                {% if award.description %}
+                                    <p class='card-text'> <strong>Extra information:</strong> {{ award.description }} </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <div id='one'>
-                <h4>@one</h4>
-                <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+        </div>
+
+        <!-- Courses and certifications info -->
+        <div class='container info-block'>
+            <div id='certifications-info' class='row info-block'>
+                <div class="col-sm-12 section-title">
+                    <h2><i class="fas fa-thumbtack fa-lg" style='color:#5c34a4'></i> Certifications and Courses</h2>
+                </div>
+                {% for certification in data.certifications reversed %}
+                    <div class='col-sm-4 d-flex align-items-stretch'>
+                        <div class="card align-items-stretch">
+                            <div class="card-body">
+                                <h4 class="card-title"><strong>{{ certification.name }}</strong></h4>
+                                <p class="card-text"> <strong>Issued by</strong>:  {{ certification.issuedBy }}</p>
+                                <p class='card-text'> <strong>Issued on</strong>: {{ certification.monthStart }} {{ certification.yearStart }}</p>
+                                <p class="card-text"> <strong>License</strong>:  {{ certification.license }}</p>
+                                <p class="card-text"> 
+                                    <strong>Expiration</strong>: {% if certification.monthEnd and certification.yearEnd %} 
+                                                                    {{ certification.monthEnd }} {{ certification.yearEnd }} 
+                                                                {% else %} {{ certification.yearEnd }} {% endif %}
+                                </p>
+                                {% if certification.url %}<a href="{{certification.url}}" class="btn btn-url">See certification</a>  {% endif%}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         
@@ -101,7 +225,7 @@
         
         
         
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src='{% static "js/bootstrap.min.js" %}'></script>
         <script src='{% static "js/script.js" %}'></script>
