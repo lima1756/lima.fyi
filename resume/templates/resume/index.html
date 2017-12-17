@@ -1,5 +1,5 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
@@ -7,45 +7,103 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Welcome!</title>
         <link rel="stylesheet" href='{% static "css/bootstrap.css" %}'>
+        <link rel="stylesheet" href='{% static "css/style.css" %}'>
+        <script defer src='{% static "fontsawesome/js/fontawesome-all.js" %}'></script>
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+    <body data-spy="scroll" data-target="#menu-bar" data-offset="0">
+        <!-- This is my all powerfull menu, it will stay fixed to the side of the page -->
+        <ul id='nav' class="nav flex-column">
+            <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Home">
+                <a class="nav-link active" href="#"><i class='fas fa-home fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+            </li>
+            <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Blog">
+                <a class="nav-link" href="#"><i class='fas fa-newspaper fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+            </li>
+            <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Projects">
+                <a class="nav-link" href="#"><i class='fas fa-desktop fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+            </li>
+            <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Contact">
+                <a class="nav-link" href="#"><i class='fas fa-envelope fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" style='color:#9068be'></i></a>
+            </li>
+        </ul>
+        
+        <div class="text-center">
+            <div id='top-bar'></div>
+            <div id='general-info-bar' class="p-3 text-white">
+                <img id="myPhoto" src='{% static "resume/img/profileImg.jpg" %}' class="img-fluid img-thumbnail card-img-top" alt="This is me ;)">
+                <h1><strong>{{ data.personal_data.name }} {{ data.personal_data.lastName }}</strong></h1>
+                <h3>{{ data.personal_data.title }}</h3>
+                <p>{{ data.aboutMe }}</p>
             </div>
+        </div>
+        <!-- This navabar would stick with the scroll of the page -->
+        <nav id='menu-bar' class="navbar sticky-top navbar-dark">
+            <ul class="nav nav-pills mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact-info">My Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#mdo">mdo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='#one'>one</a>
+                </li>
+            </ul>
         </nav>
+        <div id=infoContainer class='container'>
+            <div id='contact-info' class='row'>
+                <div class="col-sm-12">
+                    <h2><i class="far fa-address-card fa-lg" style='color:#5c34a4'></i> My Information</h2>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Personal Info</h4>
+                            <p class="card-text"><strong>I live at: </strong>{{ data.personal_data.contact.street }} #{{ data.personal_data.contact.number }}, 
+                                {{ data.personal_data.contact.city }}, {{ data.personal_data.contact.state }}, {{ data.personal_data.contact.country }}</p>
+                            <p class="card-text"><strong>My cellphone is: </strong>{{ data.personal_data.contact.cellphone }}</p>
+                            <p class="card-text"><strong>My emails are:</strong>
+                                <ul>
+                                    {% for email in data.personal_data.contact.email %}
+                                        <li><i class="fab fa-{{ email.ico }} fa-lg" style='color:#5c34a4'></i> {{ email.username }}@{{ email.domain }}</li>
+                                    {% endfor %}
+                                </ul> 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                        <h3 class="card-title">Check more about me:</h3>
+                        {% for url in data.urls %}
+                            <p class="card-text" style='margin-bottom:0'>
+                                {% if url.ico %}<i class="{{ url.ico }}" style='color:#5c34a4'></i>{% endif %} <strong>{{ url.name }}</strong>:{{ url.description }}
+                            </p>
+                            <a href="{{url.url}}" class="btn btn-url">Check it out!</a>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id='mdo'>
+                <h4>@mdo</h4>
+                <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+            </div>
+            <div id='one'>
+                <h4>@one</h4>
+                <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+            </div>
+        </div>
+        
+            
+        
+        
+        
+        
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src='{% static "js/bootstrap.min.js" %}'></script>
+        <script src='{% static "js/script.js" %}'></script>
     </body>
 </html>

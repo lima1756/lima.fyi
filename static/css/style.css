@@ -1,0 +1,50 @@
+#nav{
+    position: fixed;
+    top: 50%;
+    width: 50px;
+    z-index: 999;
+    border-radius: 100px;
+    
+}
+
+#nav .nav-item{
+    width:49px;
+}
+
+#nav .nav-item .nav-link{
+    padding-left:5px;
+    padding-right:0;
+}
+
+#myPhoto{
+    border-radius:100%;
+    width:13em;
+    margin-top:-150px
+}
+
+#top-bar{
+    height:200px;
+    background-color:#6f3eca;
+}
+
+#general-info-bar{
+    background-color:#5c34a4;
+}
+
+#menu-bar{
+    background-color:#512e90;
+    margin-top:0;
+    z-index: 998;
+}
+
+#infoContainer > div{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.btn-url{
+    background-color:#9068be; 
+    color:white; 
+    margin-bottom:1rem; 
+    margin-top:3px;
+}

@@ -15,12 +15,12 @@
                 {
                     "username":"luisivanmorett",
                     "domain":"hotmail.com",
-                    "ico":"microsoftMail"
+                    "ico":"microsoft"
                 },
                 {
                     "username":"luisivanmorett",
                     "domain":"gmail.com",
-                    "ico":"googleMail"
+                    "ico":"google"
                 }
             ]
         }
@@ -28,21 +28,27 @@
     "aboutMe":"Write down here a little paragraph about me :)",
     "urls":[
         {
-            "websiteName":"LinkedIn",
-            "url":"https://www.linkedin.com/in/ivanmorett/",
-            "description":"Hey, this is my LinkedIn profile, I try to update it but sometimes I forget to add new things (or I'm to lazy to add past things), the most updated and complet info about me is here or in my .docx resume",
-            "ico":null
+            "name":"Resume",
+            "url":"https://1drv.ms/w/s!AuhTev_HrLxbhop3FWJ9M2B1ROATSQ",
+            "description":"This is my resume, feel free to download it.",
+            "ico":"far fa-file-alt fa-lg"
         },
         {
-            "websiteName":"Github",
+            "name":"LinkedIn",
+            "url":"https://www.linkedin.com/in/ivanmorett/",
+            "description":"My LinkedIn profile, I try to update it but sometimes I forget to add new things (or I'm to lazy to add past things), the most updated and complet info about me is here or in my resume",
+            "ico":"fab fa-linkedin fa-lg"
+        },
+        {
+            "name":"Github",
             "url":"https://github.com/lima1756",
             "description":"This are the repositories I have of different projects I have worked on, you can see more about them in their respective repo.",
-            "ico":null
+            "ico":"fab fa-github fa-lg"
         },
         {
-            "websiteName":"HackerRank",
+            "name":"HackerRank",
             "url":"https://www.hackerrank.com/lima1756",
-            "description":"This is my HackerRank account, here I practice programming abilities and also learn sometimes new things about different languages or algorithms.",
+            "description":"My HackerRank account, here I practice programming abilities and also learn sometimes new things about different languages or algorithms.",
             "ico":null
         }
     ],
