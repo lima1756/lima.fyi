@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'resume.apps.ResumeConfig',
+    'admin.apps.AdminConfig',
 ]
 
 MIDDLEWARE = [

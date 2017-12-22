@@ -14,7 +14,6 @@ def index(request):
     for apt in decoded_json['aptitudes']:
         if apt['type'] not in aptitudes_categories:
             aptitudes_categories.append(apt['type'])
-    print(aptitudes_categories)
     aptitudes_categories_grid = 12//len(aptitudes_categories)
     aptitudes_categories_grid = aptitudes_categories_grid if aptitudes_categories_grid >= 3 else 3
     awards_grid = 12//len(decoded_json['awards'])
