@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('resume.urls')),
     path('admin/', include('admin.urls')),
+    path('', include('django.contrib.auth.urls'))
 ]

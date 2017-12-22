@@ -5,8 +5,10 @@ from django.template import loader
 
 
 def index(request):
-    
     context = {
         
     }
     return render(request, 'admin/base.html', context)
+
+def dashboard(request):
+    pass
