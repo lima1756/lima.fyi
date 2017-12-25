@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'resume.apps.ResumeConfig',
     'admin.apps.AdminConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+
+LOGIN_REDIRECT_URL = '/users/'
+LOGIN_URL = '/login/'

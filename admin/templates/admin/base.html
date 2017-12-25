@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,13 +12,13 @@
   <title>Admin - {% block title %}{% endblock title %}</title>
   <!-- Bootstrap core CSS-->
   <link href='{% static "css/bootstrap.css" %}' rel="stylesheet">
-  <!-- Page level plugin CSS-->
-  <link href='{% static "admin/vendor/datatables/dataTables.bootstrap4.css" %}' rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href='{% static "admin/css/sb-admin.css" %}' rel="stylesheet">
   <link href='{% static "admin/css/style.css" %}' rel="stylesheet">
   <!-- Custom fonts for this template-->
   <script defer src='{% static "fontsawesome/js/fontawesome-all.js" %}'></script>
+
+  {% block head_declarations %}{% endblock head_declarations %}
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -32,7 +33,7 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="index.html">
             
-            <span class="nav-link-text"><i class="fas fa-home"></i>Dashboard</span>
+            <span class="nav-link-text"><i class="fas fa-home"></i> Dashboard</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Blog">
@@ -54,7 +55,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="#">Edit JSON</a>
+              <a href='{% url "edit_resume_json" %}'>Edit JSON</a>
             </li>
             <li>
               <a href="#">Edit fields</a>
@@ -78,9 +79,7 @@
     </div>
   </nav>
   <div class="content-wrapper">
-    <div class="container-fluid">
         {% block content %}{% endblock content %}
-    </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -107,7 +106,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary"href='{% url "logout" %}'>Logout</a>
           </div>
         </div>
       </div>
@@ -115,22 +114,17 @@
     
     
     
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src='{% static "js/bootstrap.min.js" %}'></script>
-    <!-- Core plugin JavaScript-->
-    <script src='{% static "admin/vendor/jquery-easing/jquery.easing.min.js" %}'></script>
-    <!-- Page level plugin JavaScript-->
-    <script src='{% static "admin/vendor/chart.js/Chart.min.js" %}'></script>
-    <script src='{% static "admin/vendor/datatables/jquery.dataTables.js" %}'></script>
-    <script src='{% static "admin/vendor/datatables/dataTables.bootstrap4.js" %}'></script>
-    <!-- Custom scripts for all pages-->
-    <script src='{% static "admin/js/sb-admin.min.js" %}'></script>
-    <!-- Custom scripts for this page-->
-    <script src='{% static "admin/js/sb-admin-datatables.min.js" %}'></script>
-    <script src='{% static "admin/js/sb-admin-charts.min.js" %}'></script>
   </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src='{% static "js/bootstrap.min.js" %}'></script>
+  <!-- Core plugin JavaScript-->
+  <script src='{% static "admin/vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+  <!-- Custom scripts for all pages-->
+  <script src='{% static "admin/js/sb-admin.min.js" %}'></script>
+  {% block foot_declarations %}{% endblock foot_declarations %}
 </body>
 
 </html>

@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %} Edit Resume JSON {% endblock title %}
+
+{% block headbar %} Edit Resume JSON {% endblock headbar %}
+
+{% block head_declarations %} 
+    <link href='{% static "admin/jsoneditor/jsoneditor.min.css" %}' rel="stylesheet" type="text/css">
+    <script src='{% static "admin/jsoneditor/jsoneditor.min.js" %}'></script> 
+{% endblock head_declarations %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style='height:100%'>
+            <div class='col-xl-12'>
+                <div class='alert alert-warning'>
+                    This is only for expert users, if you don't know what you're doing please leave if you alter something wrong all the resume sections would stop working.
+                </div>
+            </div>
+            <div class="col-xl-12" id="jsoneditor" style='height:100%'>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block foot_declarations %}
+    <script>
+        json_data = {{ json_data |safe }}
+        // create the editor
+        var container = document.getElementById("jsoneditor");
+        var options = {
+            mode: 'code'
+        };
+        var editor = new JSONEditor(container, options);
+
+        // set json
+        editor.set(json_data);
+
+        // get json
+        // var json = editor.get();
+    </script> 
+{% endblock foot_declarations %}
