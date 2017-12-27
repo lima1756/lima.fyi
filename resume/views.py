@@ -4,11 +4,12 @@ from os import path
 from ivanmorett.settings import STATICFILES_DIRS
 from django.shortcuts import render
 from django.template import loader
+from admin.models import ResumeLog
 # Create your views here.
 
 
 def index(request):
-    data = json.loads(open(path.join(STATICFILES_DIRS[0], 'me.json'), encoding='utf-8').read())
+    data = json.loads(ResumeLog.objects.latest('date_time_edited').resume)
     aptitudes_categories = []
     for apt in data['aptitudes']:
         if apt['type'] not in aptitudes_categories:

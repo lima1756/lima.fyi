@@ -6,39 +6,113 @@
 {% block headbar %} Edit Resume JSON {% endblock headbar %}
 
 {% block head_declarations %} 
-    <link href='{% static "admin/jsoneditor/jsoneditor.min.css" %}' rel="stylesheet" type="text/css">
-    <script src='{% static "admin/jsoneditor/jsoneditor.min.js" %}'></script> 
+    {% if json_data %}
+        <link href='{% static "admin/jsoneditor/jsoneditor.min.css" %}' rel="stylesheet" type="text/css">
+        <script src='{% static "admin/jsoneditor/jsoneditor.min.js" %}'></script> 
+    {% endif %}
 {% endblock head_declarations %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="row" style='height:100%'>
             <div class='col-xl-12'>
-                <div class='alert alert-warning'>
-                    This is only for expert users, if you don't know what you're doing please leave if you alter something wrong all the resume sections would stop working.
-                </div>
+                <h1>Edit Resume by editing JSON file</h1>
             </div>
-            <div class="col-xl-12" id="jsoneditor" style='height:100%'>
+            <div class='col-xl-12'>
+                {% if json_data %}
+                    <div id='danger_message' class='alert alert-danger' style='display: none;'>
+                            Please check your JSON file is has syntax errors, if you're not sure what you did please refresh the page.
+                        </div>
+                    <div class='alert alert-warning'>
+                        This is only for expert users, if you don't know what you're doing please leave. If you alter something wrong the resume section may stop working.
+                    </div>
+                {% else %}
+                    <div id='corrupted_message' class='alert alert-danger'>
+                        The JSON file is corrupted, please go to the Modifications Log to recover the data.
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-xl-12" id="jsoneditor" style='height:100%;'>
+            </div>
+            <div class='col-xl-12'  style='padding-top:0.5rem;'>
+                
+                    {% if json_data %}
+                            <button class='btn btn-success' type="button" id='submitButton' data-toggle="modal" data-target="#submitModal">Submit</button>
+                        
+                    {% else %}
+                        <a href="#">
+                            <button class='btn btn-danger' type="button">Go to Modifications Log</button>
+                        </a>
+                    {% endif %}
+                </form>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="post" id='json_data_form'>
+                <div class="modal-content">
+                
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitModalLabel">Save JSON</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% for field in form %}
+                            <div class="form-group">
+                                {% if not field.is_hidden %}
+                                    {{ field.label_tag }}   
+                                {% endif %}
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small id="emailHelp" class="form-text text-muted">{{ field.help_text|safe }}</small>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <input type='submit' value='Save JSON' class='btn btn-success'/>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>  
+                    </div>
+                
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock content %}
 
+
+
 {% block foot_declarations %}
-    <script>
-        json_data = {{ json_data |safe }}
-        // create the editor
-        var container = document.getElementById("jsoneditor");
-        var options = {
-            mode: 'code'
-        };
-        var editor = new JSONEditor(container, options);
+    {% if json_data %}    
+        <script>    
+            json_data = {{ json_data |safe }}
+            // create the editor
+            var container = document.getElementById("jsoneditor");
+            var options = {
+                mode: 'code'
+            };
+            var editor = new JSONEditor(container, options);
 
-        // set json
-        editor.set(json_data);
+            // set json
+            editor.set(json_data);
 
-        // get json
-        // var json = editor.get();
-    </script> 
+
+            $('#submitButton').on('click', function() {
+                try{
+                    var json = editor.get();
+                    $('#id_resume').val(JSON.stringify(json));
+                    return true;
+                }
+                catch{
+                    $('#danger_message').show();
+                }
+                return false; 
+            });
+        </script> 
+    {% endif %}
 {% endblock foot_declarations %}
