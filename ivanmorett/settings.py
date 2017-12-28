@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'resume.apps.ResumeConfig',
     'admin.apps.AdminConfig',
     'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [

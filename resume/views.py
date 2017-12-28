@@ -5,11 +5,22 @@ from ivanmorett.settings import STATICFILES_DIRS
 from django.shortcuts import render
 from django.template import loader
 from admin.models import ResumeLog
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 
 def index(request):
-    data = json.loads(ResumeLog.objects.latest('date_time_edited').resume)
+    try:
+        data = json.loads(ResumeLog.objects.latest('date_time_edited').resume)
+    except ObjectDoesNotExist:
+        data = open(path.join(STATICFILES_DIRS[0], 'me.json'), encoding='utf-8').read()
+        new_title = 'Resume Template'
+        new_description = 'This is the initial automatic resume template.'
+        resume_log = ResumeLog(title=new_title,
+                               description=new_description,
+                               resume=data)
+        resume_log.save()
+        data = json.loads(data)
     aptitudes_categories = []
     for apt in data['aptitudes']:
         if apt['type'] not in aptitudes_categories:

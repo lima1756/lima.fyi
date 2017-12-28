@@ -33,6 +33,12 @@ def edit_resume_json(request):
         data = ResumeLog.objects.latest('date_time_edited').resume
     except ObjectDoesNotExist:
         data = open(path.join(STATICFILES_DIRS[0], 'me.json'), encoding='utf-8').read()
+        new_title = 'Resume Template'
+        new_description = 'This is the initial automatic resume template.'
+        resume_log = ResumeLog(title=new_title,
+                               description=new_description,
+                               resume=data)
+        resume_log.save()
     except MultipleObjectsReturned:
         data = '{"error":"There is an error with the database"}'
     form = ResumeLogForm()
