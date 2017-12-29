@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %} Edit Resume JSON {% endblock title %}
+
+{% block headbar %} Edit Resume JSON {% endblock headbar %}
+
+{% block head_declarations %} 
+
+{% endblock head_declarations %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style='height:100%'>
+            <div class='col-xl-12'>
+                <h1>Blog posts</h1>
+            </div>
+            <div class="col-xl-12 mb-3">
+                <div class="card text-white bg-primary o-hidden h-100">
+                    <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="mr-5"><h3>Create new post</h3></div>
+                    </div>
+                    <a href="#">
+                    <span class="float-right">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+                    </a>
+                </div>
+            </div>
+            <div class='col-xl-12'>
+                
+            </div>
+            <div class="col-xl-12" id="jsoneditor" style='height:100%;'>
+            </div>
+            <div class='col-xl-12'  style='padding-top:0.5rem;'>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+{% block foot_declarations %} 
+
+{% endblock foot_declarations %}

@@ -1,14 +1,16 @@
 from os import path
+from datetime import datetime
 from ivanmorett.settings import STATICFILES_DIRS
 from django.shortcuts import render, Http404, redirect, reverse
 from django.template import loader
 from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 from .forms import ResumeLogForm
 from .models import ResumeLog
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.http import JsonResponse
-from datetime import datetime
-from django.core.paginator import Paginator
+from blog.models import Post
+
 
 def is_superuser(user):
     return user.is_superuser
@@ -99,3 +101,12 @@ def revert_resume(request):
         return redirect(reverse('log_resume'))
     else:
         raise Http404
+
+
+@user_passes_test(is_superuser)
+def blog_posts(request):
+    posts = Post.objects.all()
+    context = {
+        'posts':posts
+    }
+    return render(request, 'admin/blog_posts.html', context)
