@@ -9,4 +9,7 @@ urlpatterns = [
     path('resume/ajax/get', views.ajax_get_resume, name='ajax_get_resume'),
     path('resume/revert', views.revert_resume, name='revert_resume'),
     path('blog/posts', views.blog_posts, name='blog_posts'),
+    path('blog/post/<int:id_post>', views.blog_post, name='blog_post'),
+    path('blog/new/post', views.blog_post, name='blog_new_post'),
+    path('blog/save/post', views.blog_post_save, name='save_post'),
 ]

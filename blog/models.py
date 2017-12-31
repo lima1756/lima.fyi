@@ -8,15 +8,15 @@ class Tag(models.Model):
     """
     name = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name
 
 class Post(models.Model):
     """
         This model describes a blog post
     """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True)
     date_time_created = models.DateTimeField(verbose_name='Creation Date-time', auto_now_add=True)
     date_time_modification = models.DateTimeField(verbose_name='Modification Date-time', auto_now=True)
-    date_time_published = models.DateTimeField(verbose_name='Date-time of publication')
     title = models.CharField(max_length=100)
     content = models.TextField()
     claps = models.BigIntegerField(default=0,
@@ -26,9 +26,10 @@ class Post(models.Model):
                                               "don't give any clap")
     tags = models.ManyToManyField(Tag)
     visible = models.BooleanField(default=False)
+    visits = models.BigIntegerField(default=0)
 
     class Meta:
-        ordering = ["-date_time_published", "-date_time_modification"]
+        ordering = ["visible", "-date_time_modification"]
 
 
 class Comment(models.Model):

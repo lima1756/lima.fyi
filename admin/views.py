@@ -7,9 +7,9 @@ from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from .forms import ResumeLogForm
+from .forms import ResumeLogForm, PostForm
 from .models import ResumeLog
-from blog.models import Post
+from blog.models import Post, Tag
 
 
 def is_superuser(user):
@@ -30,7 +30,7 @@ def edit_resume_json(request):
         modelData = ResumeLogForm(request.POST)
         commit = modelData.save()
         data = commit.resume
-        return redirect(reverse('edit_resume_json'))
+        return redirect('edit_resume_json')
     try:
         data = ResumeLog.objects.latest('date_time_edited').resume
     except ObjectDoesNotExist:
@@ -98,7 +98,7 @@ def revert_resume(request):
                                description=new_description,
                                resume=resume_to_revert.resume)
         resume_log.save()
-        return redirect(reverse('log_resume'))
+        return redirect('log_resume')
     else:
         raise Http404
 
@@ -107,6 +107,54 @@ def revert_resume(request):
 def blog_posts(request):
     posts = Post.objects.all()
     context = {
-        'posts':posts
+        'posts': posts,
     }
     return render(request, 'admin/blog_posts.html', context)
+
+
+@user_passes_test(is_superuser)
+def blog_post(request, id_post=None):
+    try:
+        post = Post.objects.get(id=id_post) if id_post else None
+    except ObjectDoesNotExist:
+        return redirect('blog_new_post')
+    saved = True if request.GET else False
+    form = PostForm(instance=post)
+    context = {
+        'form': form,
+        'post': post,
+        'saved': saved
+    }
+    return render(request, 'admin/blog_post.html', context)
+
+
+@user_passes_test(is_superuser)
+def blog_post_save(request):
+    if request.POST:
+        id = request.POST['id'] if request.POST['id'] != '' else None
+        title = request.POST['title']
+        content = request.POST['content'].replace('"', '\"')
+        visible = True if 'visible' in request.POST else False
+        tags =  request.POST.getlist('tags')
+        print(content)
+        for i in range(len(tags)):
+            if not tags[i].isnumeric():
+                tag = Tag(name=tags[i])
+                tag.save()
+                tags[i] = tag.id
+            else:
+                tags[i] = int(tags[i])
+        if id:
+            post = Post.objects.get(id=id)
+            post.title = title
+            post.content = content
+            post.visible = visible
+        else:
+            post = Post(title=title, content=content, visible=visible)
+        post.save()
+        post.tags.set(tags)
+        url = reverse('blog_post',kwargs={'id_post':post.id})
+        return redirect(url+'?saved=true')
+    raise Http404
+    
+    

@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Post',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False, unique=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, unique=True)),
                 ('date_time_created', models.DateTimeField(auto_now_add=True, verbose_name='Creation Date-time')),
                 ('date_time_modification', models.DateTimeField(auto_now=True, verbose_name='Modification Date-time')),
                 ('date_time_published', models.DateTimeField(verbose_name='Date-time of publication')),

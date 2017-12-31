@@ -6,7 +6,7 @@
 {% block headbar %} Edit Resume JSON {% endblock headbar %}
 
 {% block head_declarations %} 
-
+<link href='{% static "admin/vendor/datatables/dataTables.bootstrap4.css" %}' rel="stylesheet">
 {% endblock head_declarations %}
 
 {% block content %}
@@ -15,23 +15,49 @@
             <div class='col-xl-12'>
                 <h1>Blog posts</h1>
             </div>
+            
             <div class="col-xl-12 mb-3">
-                <div class="card text-white bg-primary o-hidden h-100">
-                    <div class="card-body">
-                    <div class="card-body-icon">
-                        <i class="fas fa-comments"></i>
+                <a href='{% url "blog_new_post" %}'>
+                    <div class="card text-white bg-primary o-hidden h-100">
+                        <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="mr-5"><h3>Create new post</h3></div>
+                        </div>
                     </div>
-                    <div class="mr-5"><h3>Create new post</h3></div>
-                    </div>
-                    <a href="#">
-                    <span class="float-right">
-                        <i class="fa fa-angle-left"></i>
-                    </span>
-                    </a>
-                </div>
+                </a>
             </div>
+            
             <div class='col-xl-12'>
-                
+                <div class="card-header">
+                    <i class="fa fa-table"></i>Posts</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Last Modification</th>
+                                    <th>Visible</th>
+                                    <th>Claps</th>
+                                    <th>Visits</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for post in posts %}
+                                    <tr>
+                                        <td><a href='{% url "blog_post" post.id %}'>{{post.title}}</a></td>
+                                        <td>{{post.date_time_modification}}</td>
+                                        <td>{{post.visible}}</td>
+                                        <td>{{post.claps}}</td>
+                                        <td>{{post.visits}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="col-xl-12" id="jsoneditor" style='height:100%;'>
             </div>
@@ -46,5 +72,7 @@
 
 
 {% block foot_declarations %} 
-
+<script src='{% static "admin/vendor/datatables/jquery.dataTables.js" %}'></script>
+<script src='{% static "admin/vendor/datatables/dataTables.bootstrap4.js" %}'></script>
+<script src='{% static "admin/js/sb-admin-datatables.min.js" %}'></script>
 {% endblock foot_declarations %}
