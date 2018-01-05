@@ -34,14 +34,16 @@ class PostForm(forms.ModelForm):
     """
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'tags', 'visible']
+        fields = ['id', 'title', 'content', 'tags', 'visible', 'date_published']
         widgets = {
             'id': forms.TextInput(),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.HiddenInput(),
             'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
-            'visible': forms.CheckboxInput(attrs={'class':'form-check-input', 'style':'margin-top:0.44rem;margin-left:0;'})
+            'visible': forms.CheckboxInput(attrs={'class':'form-check-input', 'style':'margin-top:0.44rem;margin-left:0;'}),
+            'date_published': ModDateInput
         }
         help_texts = {
             'visible': 'If you check it, the post will be visible to the users in the blog. In other hand, if you not check it, the post will not be visible.',
+            'date_published': 'The date you want it to be published, if not setted it will never be visible to the users'
         }

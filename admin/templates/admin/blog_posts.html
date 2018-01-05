@@ -17,13 +17,13 @@
             </div>
             
             <div class="col-xl-12 mb-3">
-                <a href='{% url "blog_new_post" %}'>
+                <a href='{% url "admin:blog_new_post" %}'>
                     <div class="card text-white bg-primary o-hidden h-100">
                         <div class="card-body">
-                        <div class="card-body-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <div class="mr-5"><h3>Create new post</h3></div>
+                            <div class="card-body-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="mr-5"><h3>Create new post</h3></div>
                         </div>
                     </div>
                 </a>
@@ -47,7 +47,7 @@
                             <tbody>
                                 {% for post in posts %}
                                     <tr>
-                                        <td><a href='{% url "blog_post" post.id %}'>{{post.title}}</a></td>
+                                        <td><a href='{% url "admin:blog_post" post.id %}'>{{post.title}}</a></td>
                                         <td>{{post.date_time_modification}}</td>
                                         <td>{{post.visible}}</td>
                                         <td>{{post.claps}}</td>

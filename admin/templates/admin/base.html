@@ -47,7 +47,7 @@
               <a href='#'>New Post</a>
             </li>
             <li>
-              <a href='{% url "blog_posts" %}'>See Posts</a>
+              <a href='{% url "admin:blog_posts" %}'>See Posts</a>
             </li>
           </ul>
         </li>
@@ -64,13 +64,13 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseMenu">
             <li>
-              <a href='{% url "edit_resume_json" %}'>Edit JSON</a>
+              <a href='{% url "admin:edit_resume_json" %}'>Edit JSON</a>
             </li>
             <li>
               <a href="#">Edit fields</a>
             </li>
             <li>
-                <a href='{% url "log_resume" %}'>Modifications Log</a>
+                <a href='{% url "admin:log_resume" %}'>Modifications Log</a>
               </li>
           </ul>
         </li>
@@ -118,7 +118,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary"href='{% url "logout" %}'>Logout</a>
+            <a class="btn btn-primary"href='{% url "users:logout" %}'>Logout</a>
           </div>
         </div>
       </div>

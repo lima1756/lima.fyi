@@ -134,9 +134,9 @@ def blog_post_save(request):
         id = request.POST['id'] if request.POST['id'] != '' else None
         title = request.POST['title']
         content = request.POST['content'].replace('"', '\"')
+        date = request.POST['date_published'] if request.POST['date_published'] != '' else None
         visible = True if 'visible' in request.POST else False
         tags =  request.POST.getlist('tags')
-        print(content)
         for i in range(len(tags)):
             if not tags[i].isnumeric():
                 tag = Tag(name=tags[i])
@@ -149,11 +149,12 @@ def blog_post_save(request):
             post.title = title
             post.content = content
             post.visible = visible
+            post.date_published = date
         else:
-            post = Post(title=title, content=content, visible=visible)
+            post = Post(title=title, content=content, visible=visible, date_published=date)
         post.save()
         post.tags.set(tags)
-        url = reverse('blog_post',kwargs={'id_post':post.id})
+        url = reverse('admin:blog_post',kwargs={'id_post':post.id})
         return redirect(url+'?saved=true')
     raise Http404
     

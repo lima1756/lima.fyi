@@ -112,7 +112,7 @@
                         Are you sure you want to revert to this point?
                     </div>
                     <div class="modal-footer">
-                        <form method="post" action='{% url "revert_resume" %}'>
+                        <form method="post" action='{% url "admin:revert_resume" %}'>
                             {% csrf_token %}
                             <input type="hidden" id='idRevert' name='id'>
                             <input type='submit' value='Revert to this point' class='btn btn-danger'/>
@@ -144,7 +144,7 @@
     }).on('click', function(){
         var id = substring(this.id, 'btn_schema_');
         $.ajax({
-            url: '{% url "ajax_get_resume" %}',
+            url: '{% url "admin:ajax_get_resume" %}',
             type : "POST", 
             data: {
               'id': id,

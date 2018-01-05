@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
-
+from django.utils.text import slugify
+from datetime import date
 
 class Tag(models.Model):
     """
@@ -11,12 +12,14 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
 class Post(models.Model):
     """
         This model describes a blog post
     """
     date_time_created = models.DateTimeField(verbose_name='Creation Date-time', auto_now_add=True)
     date_time_modification = models.DateTimeField(verbose_name='Modification Date-time', auto_now=True)
+    date_published = models.DateField(verbose_name='Published Date', null=True, blank=True)
     title = models.CharField(max_length=100)
     content = models.TextField()
     claps = models.BigIntegerField(default=0,
@@ -28,8 +31,24 @@ class Post(models.Model):
     visible = models.BooleanField(default=False)
     visits = models.BigIntegerField(default=0)
 
+
+    @property
+    def content_read_more(self):
+        pos = self.content.find('<hr id="read-more" style="visibility: hidden;">')
+        if pos== -1:
+            return self.content
+        else:
+            return self.content[:pos]
+
+
+    @property
+    def url_title(self):
+        return slugify(self.title)
+
+
+
     class Meta:
-        ordering = ["visible", "-date_time_modification"]
+        ordering = ["visible", "-date_published", "-date_time_modification"]
 
 
 class Comment(models.Model):

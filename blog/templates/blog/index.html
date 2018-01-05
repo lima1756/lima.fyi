@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+
+{% block h1 %}Blog{% endblock h1 %}
+
+{% block blog_content %}
+    <div class='container'>
+        <div class='row info-block'>
+            <div class='col-xl-12'>
+                {% for post in posts %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class='card-title'><strong>{{ post.title }}</strong></h3>
+                            <small>{{ post.date_published }}</small>
+                            <div class='card-text'>
+                                {{ post.content_read_more | safe}}
+                            </div> 
+                            <div class='text-right'>
+                                <a href='{% url "blog:post" post.id post.url_title%}' class="btn btn-url">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock blog_content %}

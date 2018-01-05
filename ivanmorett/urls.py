@@ -17,7 +17,8 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('', include('resume.urls')),
-    path('admin/', include('admin.urls')),
-    path('', include('users.urls')),
+    path('', include(('resume.urls', 'resume'), namespace='resume')),
+    path('admin/', include(('admin.urls', 'admin'), namespace='admin')),
+    path('', include(('users.urls', 'users'), namespace='users')),
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
 ]
