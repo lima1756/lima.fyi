@@ -1,0 +1,41 @@
+{% extends "contact/base.html" %}
+{% load static %}
+
+
+{% block h1 %}Contact{% endblock h1 %}
+
+{% block contact_content %}
+<div class='container'>
+    <div class='row info-block'>
+        <div class='col-xl-12'>
+            <div class="card">
+                <div class="card-body">
+                    <div class='card-text'>
+                        {{ form.description | safe }}
+                    </div> 
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" action='{% url "contact:send" %}'>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.name.id_for_label }}">Name:</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group">
+                          <label for="{{ form.email.id_for_label }}">Email address:</label>
+                          {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                          <label for="{{ form.message.id_for_label }}">Message:</label>
+                          {{ form.message }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contact_content %}
