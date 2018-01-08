@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Portfolio{% endblock title %}
+
+
+{% block head_declarations %}{% endblock head_declarations %}
+
+{% block content %}
+        <div class="text-center">
+            <div id='general-info-bar' class="p-3 text-white">
+                <h1><strong>{% block h1 %}{% endblock h1 %}</strong></h1>
+            </div>
+        </div>
+        {% block portfolio_content %}{% endblock portfolio_content %}
+{% endblock content %}
+        
+
+
+{% block foot_declarations %}{% endblock foot_declarations %}

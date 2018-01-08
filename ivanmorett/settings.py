@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'admin.apps.AdminConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
+    'portfolio.apps.PortfolioConfig',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,10 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/users/'
 LOGIN_URL = '/login/'
 
+
+
+# MEDIA_ROOT
+# https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-MEDIA_ROOT
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

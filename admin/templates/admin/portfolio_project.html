@@ -1,0 +1,142 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %} {% if post %} {{ post.title }} {% else %} New {% endif %} Post  {% endblock title %}
+
+
+{% block head_declarations %} 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link href='{% static "admin/summernote/summernote-bs4.css" %}' rel="stylesheet">
+{% endblock head_declarations %}
+
+
+{% block headbar %}  {% endblock headbar %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style='height:100%'>
+            <div class='col-xl-12'>
+                <h1>{% if project %} {{ project.name }} {% else %} New Project {% endif %}</h1>
+            </div>
+            {% if saved %}
+                <div class='col-xl-12'>
+                    <div class='alert alert-success' id='saved'>
+                        Saved correctly
+                    </div>
+                </div>
+            {% endif %}
+            <div class='col-xl-12'>
+                <form method="post" id='project_form' action='{% url "admin:save_project" %}' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" id='id_id' value='{{ project.id }}'>
+                    <div class="card-header">
+                        <div class="form-group">
+                            <label for='{{ form.title.id_for_label }}'>Name: </label>
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for='{{ form.summary.id_for_label }}'>Summary: </label>
+                            {{ form.summary }}
+                        </div>
+                        <div class="form-group">
+                            <label for='project_content'>Post Content: </label>
+                            <div id="project_content"></div>
+                            {{ form.content }}
+                        </div>
+                        <div class="form-group">
+                            <label for='{{ form.tags.id_for_label }}'>Tags: </label>
+                            {{ form.tags }}
+                        </div>
+                        <div class="form-group">
+                            <label for='{{ form.logo.id_for_label }}'>Example file input</label>
+                            {{ form.logo }}
+                        </div>
+                        <div class="form-check">
+                            {{ form.visible }}
+                            <label class='form-check-label' for='{{ form.visible.id_for_label }}'>Set visible: </label>
+                            <small id="visible_help" class="form-text text-muted">{{ form.visible.help_text|safe }}</small>
+                        </div>
+                        
+                    </div>    
+                            
+                            
+                    <div class="card-footer">
+                        <input type='submit' value='Save' class='btn btn-success'/>
+                        <a href='{% url "admin:blog_posts" %}'><button class='btn btn-primary' type=button> Return to Portfolio</button></a>
+                    </div>
+                        
+                        </div>
+                    </form>
+                
+                
+            </div>
+            <div class="col-xl-12" id="jsoneditor" style='height:100%;'>
+            </div>
+            <div class='col-xl-12'  style='padding-top:0.5rem;'>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+{% block foot_declarations %} 
+    <script src='{% static "admin/summernote/summernote-bs4.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+
+
+        // Initializing Summernote editor
+        $('#project_content').summernote({
+            placeholder: "Project content: Write everything you think is necessary to describe the project",
+            height: 200,
+            toolbar: [
+                ['options', ['undo', 'redo']],
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['link', 'table', 'hr']],
+                ['media', ['picture', 'video']],
+                ['misc', ['fullscreen','codeview','help']]
+            ]
+        });
+
+        
+        {% if project %}
+            // Recovering the data from the form to the summernote editor
+            $('#project_content').summernote('code', $("#{{ form.content.id_for_label }}").val());
+        {% endif %}
+        
+        // Initializing select2
+        $('#{{ form.tags.id_for_label }}').select2({
+            tags: true
+        });
+
+        // Recovering the code from the summernote editor to the form before submit
+        $('#project_form').submit(function(){
+            var markupStr = $('#project_content').summernote('code');
+            $("#{{form.content.id_for_label}}").val(markupStr);
+        });
+
+
+        {% if saved %}       
+            // Hide the saved alert 
+            $(document).ready(function() {
+                    var startTime = Date.now();
+                    var end = startTime + 3000;
+                    while(startTime<end)
+                        startTime = Date.now();
+                    $("#saved").fadeOut();
+            });
+        {% endif %}
+    </script>
+{% endblock foot_declarations %}

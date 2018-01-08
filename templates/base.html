@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li class="nav-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Projects">
-                <a class="nav-link menu-item" href="#">
+                <a class="nav-link menu-item" href='{% url "portfolio:index" %}'>
                     <i class='fas fa-desktop fa-3x' data-fa-transform="shrink-3.5 down-1.6 right-1.25"  data-fa-mask="fas fa-circle" ></i>
                 </a>
             </li>
@@ -38,7 +38,16 @@
         </ul>
 
         {% block content %} {% endblock content %}
-
+        <div class="content-wrapper" style='padding-top:3em'>
+            <footer class="sticky-footer">
+                <div class="container alert-darkr">
+                    <div class="text-center">
+                        <strong>Copyright © Ivan Morett - {% now "Y" %}</strong>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        
         
         
             

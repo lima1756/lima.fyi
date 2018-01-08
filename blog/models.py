@@ -34,17 +34,21 @@ class Post(models.Model):
 
     @property
     def content_read_more(self):
+        """
+            This property returns the parsed text if it has an horizontal rule with id "read-more"
+        """
         pos = self.content.find('<hr id="read-more" style="visibility: hidden;">')
         if pos== -1:
             return self.content
-        else:
-            return self.content[:pos]
+        return self.content[:pos]
 
 
     @property
     def url_title(self):
+        """
+            This property returns the title slugified for an URL
+        """
         return slugify(self.title)
-
 
 
     class Meta:

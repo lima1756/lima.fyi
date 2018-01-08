@@ -32,19 +32,19 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href='{% url "admin:index" %}'>
             
             <span class="nav-link-text"><i class="fas fa-home"></i> Dashboard</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Blog">
-          <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#collapseMenu">
+          <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#collapseBlog">
             <i class="fas fa-newspaper"></i>
             <span class="nav-link-text">Blog</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseMenu">
+          <ul class="sidenav-second-level collapse" id="collapseBlog">
             <li>
-              <a href='#'>New Post</a>
+              <a href='{% url "admin:blog_new_post" %}'>New Post</a>
             </li>
             <li>
               <a href='{% url "admin:blog_posts" %}'>See Posts</a>
@@ -52,22 +52,30 @@
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Projects">
-          <a class="nav-link" href="#">
-            <i class="fas fa-desktop"></i>
-            <span class="nav-link-text"> Projects</span>
+          <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#collapseProjects">
+            <i class="fas fa-newspaper"></i>
+            <span class="nav-link-text">Portfolio</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapseProjects">
+            <li>
+              <a href='{% url "admin:portfolio_new_project" %}'>New Project</a>
+            </li>
+            <li>
+              <a href='{% url "admin:portfolio" %}'>See Projects</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Resume">
-          <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#collapseMenu">
+          <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#collapseResume">
             <i class="fas fa-user"></i>
             <span class="nav-link-text">Edit Resume</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseMenu">
+          <ul class="sidenav-second-level collapse" id="collapseResume">
             <li>
               <a href='{% url "admin:edit_resume_json" %}'>Edit JSON</a>
             </li>
             <li>
-              <a href="#">Edit fields</a>
+              <a href="#" class='disabled'>Edit fields</a>
             </li>
             <li>
                 <a href='{% url "admin:log_resume" %}'>Modifications Log</a>

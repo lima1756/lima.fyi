@@ -6,10 +6,12 @@ from django.template import loader
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.paginator import Paginator
+from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
-from .forms import ResumeLogForm, PostForm
+from .forms import ResumeLogForm, PostForm, ProjectForm
 from .models import ResumeLog
-from blog.models import Post, Tag
+import blog.models as blog
+import portfolio.models as portfolio
 
 
 def is_superuser(user):
@@ -105,7 +107,7 @@ def revert_resume(request):
 
 @user_passes_test(is_superuser)
 def blog_posts(request):
-    posts = Post.objects.all()
+    posts = blog.Post.objects.all()
     context = {
         'posts': posts,
     }
@@ -115,7 +117,7 @@ def blog_posts(request):
 @user_passes_test(is_superuser)
 def blog_post(request, id_post=None):
     try:
-        post = Post.objects.get(id=id_post) if id_post else None
+        post = blog.Post.objects.get(id=id_post) if id_post else None
     except ObjectDoesNotExist:
         return redirect('blog_new_post')
     saved = True if request.GET else False
@@ -139,23 +141,70 @@ def blog_post_save(request):
         tags =  request.POST.getlist('tags')
         for i in range(len(tags)):
             if not tags[i].isnumeric():
-                tag = Tag(name=tags[i])
+                tag = blog.Tag(name=tags[i])
                 tag.save()
                 tags[i] = tag.id
             else:
                 tags[i] = int(tags[i])
         if id:
-            post = Post.objects.get(id=id)
+            post = blog.Post.objects.get(id=id)
             post.title = title
             post.content = content
             post.visible = visible
             post.date_published = date
         else:
-            post = Post(title=title, content=content, visible=visible, date_published=date)
+            post = blog.Post(title=title, content=content, visible=visible, date_published=date)
         post.save()
         post.tags.set(tags)
         url = reverse('admin:blog_post',kwargs={'id_post':post.id})
         return redirect(url+'?saved=true')
     raise Http404
-    
-    
+
+
+@user_passes_test(is_superuser)
+def portfolio_index(request):
+    projects = portfolio.Project.objects.all()
+    context = {
+        'projects': projects,
+    }
+    return render(request, 'admin/portfolio.html', context)
+
+@user_passes_test(is_superuser)
+def portfolio_project(request, id_project=None):
+    try:
+        project = portfolio.Project.objects.get(id=id_project) if id_project else None
+    except ObjectDoesNotExist:
+        return redirect('portfolio_new_project')
+    saved = True if request.GET else False
+    form = ProjectForm(instance=project)
+    context = {
+        'form': form,
+        'project': project,
+        'saved': saved
+    }
+    return render(request, 'admin/portfolio_project.html', context)
+
+
+@user_passes_test(is_superuser)
+def portfolio_project_save(request):
+    if request.POST:
+        post = request.POST.copy()
+        tags =  request.POST.getlist('tags')
+        for i in range(len(tags)):
+            if not tags[i].isnumeric():
+                tag = portfolio.Tag(name=tags[i])
+                tag.save()
+                tags[i] = tag.id
+            else:
+                tags[i] = int(tags[i])
+        post.setlist('tags', tags)
+        form = ProjectForm(post, request.FILES)
+        if form.is_valid():
+            saved = form.save(commit=False)
+            saved.id = request.POST['id'] if request.POST['id'] != '' else None
+            saved.save()
+            saved.tags.set(tags)
+            saved.save()
+            url = reverse('admin:portfolio_project',kwargs={'id_project':saved.id})
+            return redirect(url+'?saved=true')
+    raise Http404

@@ -12,4 +12,8 @@ urlpatterns = [
     path('blog/post/<int:id_post>', views.blog_post, name='blog_post'),
     path('blog/new/post', views.blog_post, name='blog_new_post'),
     path('blog/save/post', views.blog_post_save, name='save_post'),
+    path('portfolio/', views.portfolio_index, name='portfolio'),
+    path('portfolio/project/<int:id_project>', views.portfolio_project, name='portfolio_project'),
+    path('portfolio/new/project', views.portfolio_project, name='portfolio_new_project'),
+    path('portfolio/save/project', views.portfolio_project_save, name='save_project'),
 ]

@@ -1,7 +1,7 @@
 from django import forms
 from .models import ResumeLog
 from blog.models import Post
-
+from portfolio.models import Project
 
 class ModDateInput(forms.DateInput):
     """
@@ -46,4 +46,25 @@ class PostForm(forms.ModelForm):
         help_texts = {
             'visible': 'If you check it, the post will be visible to the users in the blog. In other hand, if you not check it, the post will not be visible.',
             'date_published': 'The date you want it to be published, if not setted it will never be visible to the users'
+        }
+
+
+
+class ProjectForm(forms.ModelForm):
+    """
+        This form is the representation of the Model Portfolio.Project
+    """
+    class Meta:
+        model = Project
+        fields = ['id', 'name', 'summary', 'content', 'logo', 'tags', 'visible']
+        widgets = {
+            'id': forms.HiddenInput(),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'summary': forms.Textarea(attrs={'class': 'form-control', 'rows':3}),
+            'content': forms.HiddenInput(),
+            'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'visible': forms.CheckboxInput(attrs={'class':'form-check-input', 'style':'margin-top:0.44rem;margin-left:0;'})
+        }
+        help_texts = {
+            'visible': 'If you check it, the project will be visible to the users in the portfolio. In other hand, if you not check it, the project will not be visible.'
         }
