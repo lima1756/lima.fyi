@@ -57,7 +57,7 @@
             "url":"https://www.hackerrank.com/lima1756",
             "description":"My HackerRank account, here I practice programming abilities and also learn sometimes new things about different languages or algorithms.",
             "ico":null
-        }        
+        }
     ],
 "education":[{
 "school":"Centro de Enseñanza Técnica Industrial",
@@ -115,19 +115,15 @@
 }],
 "awards":[{
 "name":"2° place in calendar 2015a on scholar performance in Computer Science Division ",
-"relationship":["education",
-0],
+"relationship":["education",0],
 "issuedBy":"Centro de Enseñanza Técnica Industrial",
 "month":null,
 "year":null,
 "description":null
 },
 {
-"name":"1° place in calendars 2014a,
- 2015b,
- 2016a and 2016b on scholar performance in Computer Science Division",
-"relationship":["education",
-0],
+"name":"1° place in calendars 2014a, 2015b, 2016a and 2016b on scholar performance in Computer Science Division",
+"relationship":["education",0],
 "issuedBy":"Centro de Enseñanza Técnica Industrial",
 "month":null,
 "year":null,
@@ -143,8 +139,7 @@
 },
 {
 "name":"2° place in IngeTec 2017A Computer Science Division",
-"relationship":["education",
-0],
+"relationship":["education",0],
 "issuedBy":"Centro de Enseñanza Técnica Industrial",
 "month":"June",
 "year":2017,
@@ -179,8 +174,7 @@
 "url":"https://courses.edx.org/certificates/431b48f53986428a97bb739eaae54482"
 },
 {
-"name":"Completition of C# Intermediate: Classes,
- Interfaces and OOP",
+"name":"Completition of C# Intermediate: Classes, Interfaces and OOP",
 "issuedBy":"Udemy",
 "license":"UC-6XGRC507",
 "monthStart":"November",

@@ -21,7 +21,7 @@ def send(request):
             contact_data.email,
             ['luisivanmorett@gmail.com']
         )
-        redirect('contact.index')
-    raise Http404    
+        return redirect('contact:index')
+    raise Http404
 
 

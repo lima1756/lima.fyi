@@ -11,7 +11,7 @@
             <img id="myPhoto" src='{% static "resume/img/profileImg.jpg" %}' class="img-fluid img-thumbnail card-img-top" alt="This is me ;)">
             <h1><strong>{{ data.personal_data.name }} {{ data.personal_data.lastName }}</strong></h1>
             <h3>{{ data.personal_data.title }}</h3>
-            <p>{{ data.aboutMe }}</p>
+            <p>{{ data.aboutMe | safe }}</p>
         </div>
     </div>
 
