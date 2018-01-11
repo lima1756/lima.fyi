@@ -32,7 +32,7 @@ def edit_resume_json(request):
         modelData = ResumeLogForm(request.POST)
         commit = modelData.save()
         data = commit.resume
-        return redirect('edit_resume_json')
+        return redirect('admin:edit_resume_json')
     try:
         data = ResumeLog.objects.latest('date_time_edited').resume
     except ObjectDoesNotExist:
@@ -100,7 +100,7 @@ def revert_resume(request):
                                description=new_description,
                                resume=resume_to_revert.resume)
         resume_log.save()
-        return redirect('log_resume')
+        return redirect('admin:log_resume')
     else:
         raise Http404
 
@@ -119,7 +119,7 @@ def blog_post(request, id_post=None):
     try:
         post = blog.Post.objects.get(id=id_post) if id_post else None
     except ObjectDoesNotExist:
-        return redirect('blog_new_post')
+        return redirect('admin:blog_new_post')
     saved = True if request.GET else False
     form = PostForm(instance=post)
     context = {
@@ -174,7 +174,7 @@ def portfolio_project(request, id_project=None):
     try:
         project = portfolio.Project.objects.get(id=id_project) if id_project else None
     except ObjectDoesNotExist:
-        return redirect('portfolio_new_project')
+        return redirect('admin:portfolio_new_project')
     saved = True if request.GET else False
     form = ProjectForm(instance=project)
     context = {

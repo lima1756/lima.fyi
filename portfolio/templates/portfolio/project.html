@@ -1,7 +1,7 @@
 {% extends "portfolio/base.html" %}
 {% load static %}
 
-{% block title %} project.name {% endblock title %}
+{% block title %} {{ project.name }} {% endblock title %}
 
 {% block h1 %}{{ project.name }}{% endblock h1 %}
 
@@ -10,7 +10,15 @@
         <div class='row info-block'>
             <div class='col-xl-12'>
                 <div class="card">
-                    <img class="responsive" src="{{ project.logo.url }}" alt="project.name" width=100>
+                    <div class="card-body">
+                        <div class='card-text'>
+                            {% if project.logo %}
+                                <img class="responsive" src="{{ project.logo.url }}" alt="project.name" width=100>
+                            {% endif %}
+                            {{ project.summary }}
+                        </div> 
+                    </div>
+                    <hr>
                     <div class="card-body">
                         <div class='card-text'>
                             {{ project.content | safe}}
