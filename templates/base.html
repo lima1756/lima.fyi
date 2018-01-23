@@ -9,6 +9,9 @@
         <link rel="stylesheet" href='{% static "css/bootstrap.css" %}'>
         <link rel="stylesheet" href='{% static "css/style.css" %}'>
         <script defer src='{% static "fontsawesome/js/fontawesome-all.js" %}'></script>
+        <meta name='Author' content='Ivan Morett'/>
+        <meta name='Description' content='{% block meta_description %}{% endblock meta_description %}'/>
+        <meta name='keywords' content='{% block meta_keywords %}{% endblock meta_keywords %}'/>
         {% block head_declarations %}{% endblock head_declarations %}
     </head>
     <body data-spy="scroll" data-target="#menu-bar">
