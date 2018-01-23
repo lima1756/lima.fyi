@@ -24,4 +24,5 @@ urlpatterns = [
     path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
     path('portfolio/', include(('portfolio.urls', 'portfolio'), namespace='portfolio')),
     path('contact/', include(('contact.urls', 'contact'), namespace='contact')),
+    path('ardillas_salvajes/', include(('ardillas_salvajes.urls', 'ardillas_salvajes'), namespace='ardillas_salvajes')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
