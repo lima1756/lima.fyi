@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Base Conversor{% endblock title %}
+
+
+{% block head_declarations %}{% endblock head_declarations %}
+
+{% block content %}
+        <div class="text-center">
+            <div id='general-info-bar' class="p-3 text-white">
+                <h1><strong>Base Conversor</strong></h1>
+            </div>
+        </div>
+        <div class='container'>
+            <div class='row info-block'>
+                <div class='col-xl-12'>
+                    <div class='alert alert-danger' id='error' style="display: none"></div>
+                    <form>
+                        <div class="form-group">
+                          <label for="base16">Base 16</label>
+                          <input pattern="[a-fA-F\d]*" class="form-control" id="base16"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="base10">Base 10</label>
+                            <input pattern="\d*" class="form-control" id="base10"/>
+                            <small class="form-text text-muted">Max number: 9007199254740992</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="base8">Base 8</label>
+                            <input pattern="[01234567]*" class="form-control" id="base8">
+                        </div>
+                        <div class="form-group">
+                              <label for="base2">Base 2</label>
+                              <input pattern="[01]*" class="form-control" id="base2">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+        
+
+
+{% block foot_declarations %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src='{% static "base_conversor/base_conversor.js" %}'></script>
+{% endblock foot_declarations %}

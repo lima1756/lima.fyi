@@ -25,4 +25,5 @@ urlpatterns = [
     path('portfolio/', include(('portfolio.urls', 'portfolio'), namespace='portfolio')),
     path('contact/', include(('contact.urls', 'contact'), namespace='contact')),
     path('ardillas_salvajes/', include(('ardillas_salvajes.urls', 'ardillas_salvajes'), namespace='ardillas_salvajes')),
+    path('base_conversor/', include(('base_conversor.urls', 'base_conversor'), namespace='base_conversor')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
