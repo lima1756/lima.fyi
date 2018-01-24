@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'portfolio.apps.PortfolioConfig',
     'contact.apps.ContactConfig',
-    'ardillas_salvajes.apps.ArdillasSalvajesConfig',
 ]
 
 MIDDLEWARE = [
