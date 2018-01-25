@@ -26,4 +26,5 @@ urlpatterns = [
     path('contact/', include(('contact.urls', 'contact'), namespace='contact')),
     path('ardillas_salvajes/', include(('ardillas_salvajes.urls', 'ardillas_salvajes'), namespace='ardillas_salvajes')),
     path('base_conversor/', include(('base_conversor.urls', 'base_conversor'), namespace='base_conversor')),
+    path('base_converter/', include(('base_conversor.urls', 'base_converter'), namespace='base_covnerter')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
