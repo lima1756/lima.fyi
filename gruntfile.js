@@ -69,6 +69,17 @@ module.exports = function (grunt) {
                 }
             },
         },
+        shell: {
+            publish: {
+                command: 'aws s3 sync . s3://lima.fyi',
+                options: {
+                    stderr: false,
+                    execOptions: {
+                        cwd: 'build'
+                    }
+                }
+            }
+        },
         uglify: {
             js: {
                 files: {
@@ -93,7 +104,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-usemin');
 
-    grunt.registerTask('default', ['clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'htmlmin']);
+    grunt.registerTask('default', ['clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'htmlmin', 'shell']);
 };
