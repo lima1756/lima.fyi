@@ -21,22 +21,25 @@ module.exports = function (grunt) {
         clean: ['<%= paths.build %>'],
         concat: {
             js: {
+                // Can't use src/**/*.js because orden matters
                 src: [
                     '<%= paths.src_resources %>/js/jquery.min.js',
                     '<%= paths.src_resources %>/js/modernizr.custom.js',
-                    '<%= paths.src_resources %>/js/animating.js',                    
-                    '<%= paths.input.js %>',
-                    '!<%= paths.src_resources %>/js/main.js',
-                    '!<%= paths.src_resources %>/js/validator.js',
-                    '!<%= paths.src_resources %>/js/jquery.magnific-popup.min.js',
+                    '<%= paths.src_resources %>/js/animating.js',
+                    '<%= paths.src_resources %>/js/imagesloaded.pkgd.min.js',
+                    '<%= paths.src_resources %>/js/perfect-scrollbar.min.js',
+                    '<%= paths.src_resources %>/js/jquery.shuffle.min.js',
+                    '<%= paths.src_resources %>/js/masonry.pkgd.min.js',
+                    '<%= paths.src_resources %>/js/owl.carousel.min.js',
                     '<%= paths.src_resources %>/js/jquery.magnific-popup.min.js',
                     '<%= paths.src_resources %>/js/validator.js',
+                    '<%= paths.src_resources %>/js/breezy.js',
                     '<%= paths.src_resources %>/js/main.js',
                 ],
                 dest: '<%= paths.output.js %>'
             },
             css: {
-                src: ['<%= paths.src_resources %>/css/main.css', '<%= paths.input.css %>'],
+                src: ['<%= paths.src_resources %>/css/breezy.css', '<%= paths.input.css %>'],
                 dest: '<%= paths.output.css %>'
             }
         },
@@ -107,5 +110,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-usemin');
 
-    grunt.registerTask('default', ['clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'htmlmin', 'shell']);
+    grunt.registerTask('build', ['clean', 'copy', 'useminPrepare', 'concat']);
+    grunt.registerTask('min', ['useminPrepare', 'build', 'uglify', 'cssmin', 'usemin', 'htmlmin', 'usemin']);
+    grunt.registerTask('default', ['min', 'shell']);
+    
 };

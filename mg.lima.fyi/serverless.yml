@@ -1,0 +1,22 @@
+service: limafyi-mail
+frameworkVersion: '2'
+
+custom:
+  secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: ${self:custom.secrets.NODE_ENV}
+  region: us-west-1
+  environment: 
+    CAPTCHA_API_KEY: ${self:custom.secrets.CAPTCHA_API_KEY}
+    CAPTHA_SITE_KEY: ${self:custom.secrets.CAPTHA_SITE_KEY}
+    DOMAIN: ${self:custom.secrets.DOMAIN}
+    EMAIL: ${self:custom.secrets.EMAIL}
+    MAILGUN_API_KEY: ${self:custom.secrets.MAILGUN_API_KEY}
+
+functions:
+  send:
+    handler: handler.send

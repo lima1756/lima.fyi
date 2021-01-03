@@ -1,0 +1,26 @@
+.frc-captcha.dark {
+    width: auto;
+    border: none;
+}
+
+#contact-form-title{
+    margin-bottom: 0;
+    padding-bottom:6px;
+}
+
+#btn-send-form{
+    float:right;
+    margin: 12px 0;
+}
+
+#form-result {
+    margin-bottom: 20px;
+}
+
+.danger {
+    color: #d9534f;
+}
+
+.info {
+    color: #f58545;
+}
